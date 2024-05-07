@@ -46,6 +46,21 @@ const pAequorFactory = (num, array) => {
         return true;
       else
         return false;
+    },
+    complementStrand() {
+      const complement = this.dna.map(DNABase => {
+        if(DNABase === 'A')
+          return 'T';
+        else if(DNABase === 'C')
+          return 'G';
+        else if(DNABase === 'T')
+          return 'A';
+        else if(DNABase === 'G')
+          return 'C';
+        else 
+          return 'Unexpected values.';
+      });
+      return complement;
     }
   }
 }
@@ -59,7 +74,7 @@ console.log(specimen2);
 // Testing methods 
 specimen1.mutate();
 console.log(specimen1);
-
+console.log(specimen1.complementStrand());
 specimen1.compareDNA(specimen2);
 
 console.log(specimen1.willLikelySurvive());
@@ -80,9 +95,20 @@ const createSpecimens = numberOfSpecimens => {
   return specimenArray;
 }
 
-//console.log(createSpecimens(2)); 
+//console.log(createSpecimens(6)); 
+ // Finding the specimens with the most similar DNA in a given array sample
 
+ const findSimilar = array => {
+  for (let i = 0; i < array.length; i++){
+    for (let j = i + 1; j < array.length; j++){
+      array[i].compareDNA(array[j]);
+    }
 
+  }
+ }
+ 
+ const sample = createSpecimens(6);
+ findSimilar(sample);
 
 
 
